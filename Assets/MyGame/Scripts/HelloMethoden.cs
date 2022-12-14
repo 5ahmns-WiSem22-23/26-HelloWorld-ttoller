@@ -18,38 +18,50 @@ public class HelloMethoden : MonoBehaviour
         // Verwende Start Methode
         Debug.Log("Hello Methoden!");
 
-        Debug.Log("before startValue: " + startValue2);
-        IncrementByOne();
-        Debug.Log("after startValue: " + startValue2);
+        LogBefore(startValue2, "startValue2");
+        IncrementValue2ByOne();
+        LogAfter(startValue2, "startValue2");
 
-        Debug.Log("before startValue3: " + startValue3);
-        IncrementByX(Random.Range(1, 10));
-        Debug.Log("after startValue3: " + startValue3);
+        LogBefore(startValue3, "startValue3");
+        IncrementValue3ByX(Random.Range(1, 10));
+        LogAfter(startValue3, "startValue3");
 
-        Debug.Log("before startValue4: " + startValue4);
-        DecrementByOne(startValue4);
-        Debug.Log("after startValue4: " + startValue4);
+        LogBefore(startValue4, "startValue4");
+        OutputDecrementedValue(startValue4);
+        LogAfter(startValue4, "startValue4");
 
-        Debug.Log("before startValue5: " + startValue5);
-        startValue5 = DecrementByX(startValue5, 2);
-        Debug.Log("after startValue5: " + startValue5);
+        LogBefore(startValue5, "startValue5");
+        startValue5 = GetDifference(startValue5, 2);
+        LogAfter(startValue5, "startValue5");
     }
-    private int DecrementByX(int start, int valToSub)
+    private int GetDifference(int first, int second)
     {
-        return start - valToSub;
+        return Mathf.Abs(first - second);
     }
 
-    private void DecrementByOne(int val)
+    private void OutputDecrementedValue(int value)
     {
-        val--;
-        Debug.Log("val: " + val);
+        value--;
+        Debug.Log("val: " + value);
     }
-    private void IncrementByX(int valToAdd)
+    private void IncrementValue3ByX(int x)
     {
-        startValue3 += valToAdd;
+        startValue3 += x;
     }
-    private void IncrementByOne()
+    private void IncrementValue2ByOne()
     {
         startValue2++; // ist das gleiche wie startValue = startValue + 1;
+    }
+    private void LogBefore(int variable, string name)
+    {
+        LogWithPrefix("before", $"{name}: {variable}");
+    }
+    private void LogAfter(int variable, string name)
+    {
+        LogWithPrefix("after", $"{name}: {variable}");
+    }
+    private void LogWithPrefix(string prefix, string message)
+    {
+        Debug.Log($"{prefix} {message}");
     }
 }
